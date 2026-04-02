@@ -343,7 +343,7 @@ def build_global_trend_chart(global_ts):
     fig.update_xaxes(gridcolor='#f0f0f0')
     return fig
 
-
+#this is used for building_top15_bar
 def build_top15_bar(long_df):
     """Horizontal bar chart — Top 15 countries by total cases."""
 
