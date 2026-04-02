@@ -10,17 +10,12 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-
-
-
 st.set_page_config(
     page_title      = "EpiTrack | COVID-19 Epidemic Dashboard",
     page_icon       = "🦠",
     layout          = "wide",
     initial_sidebar_state = "expanded"
 )
-
-
 
 st.markdown("""
 <style>
@@ -121,15 +116,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-
-
 @st.cache_data(show_spinner=False)
 def load_all_data():
     """Load all pre-computed CSV exports from Steps 1–3."""
 
     data = {}
 
-    # --- Step 1 outputs ---
     data['global_ts'] = pd.read_csv(
         "covid_global_timeseries.csv", parse_dates=['Date']
     )
@@ -138,7 +130,6 @@ def load_all_data():
         "covid_long_format.csv", parse_dates=['Date']
     )
 
-    # --- Step 2 outputs ---
     data['global_forecast'] = pd.read_csv(
         "global_forecast.csv", parse_dates=['ds']
     )
@@ -147,7 +138,6 @@ def load_all_data():
         "country_forecasts.csv", parse_dates=['ds']
     )
 
-    # --- Step 3 outputs ---
     data['risk_snap'] = pd.read_csv("covid_risk_map_data.csv")
     data['country_risk'] = pd.read_csv("covid_country_risk.csv")
 
@@ -616,10 +606,6 @@ def build_country_forecast_chart(country_forecasts_df, long_df, country):
     return fig
 
 
-# ============================================================
-# SIDEBAR — Navigation & Branding
-# ============================================================
-
 with st.sidebar:
     st.markdown("""
     <div style='text-align:center; padding: 10px 0 20px 0;'>
@@ -664,9 +650,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 
-# ============================================================
-# DATA LOAD (runs once, cached)
-# ============================================================
+
 
 with st.spinner("Loading pre-computed epidemic data..."):
     data    = load_all_data()
@@ -681,10 +665,6 @@ country_risk       = data['country_risk']
 
 available_countries = sorted(country_forecasts['Country'].unique().tolist())
 
-
-# ============================================================
-# PAGE 1 — OVERVIEW & RISK MAP
-# ============================================================
 
 if page == "🌍  Overview & Risk Map":
 
@@ -797,10 +777,6 @@ if page == "🌍  Overview & Risk Map":
     )
 
 
-# ============================================================
-# PAGE 2 — TREND ANALYSIS
-# ============================================================
-
 elif page == "📈  Trend Analysis":
 
     st.markdown(
@@ -876,9 +852,6 @@ elif page == "📈  Trend Analysis":
             st.dataframe(df_display, use_container_width=True, hide_index=True)
 
 
-# ============================================================
-# PAGE 3 — AI FORECAST (PROPHET)
-# ============================================================
 
 elif page == "🤖  AI Forecast (Prophet)":
 
