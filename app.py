@@ -255,7 +255,7 @@ def build_choropleth(df_country_risk):
         locations='ISO_Alpha',
         color='Log_Cases',
         hover_name='Country/Region',
-        hover_data={
+        hover_data={                         # hover tag is used hovering the data anf country/region data.
             'Confirmed_Cases' : ':,',
             'Log_Cases'       : ':.2f',
             'ISO_Alpha'       : False
@@ -281,7 +281,7 @@ def build_choropleth(df_country_risk):
         coloraxis_colorbar=dict(
             title='Log₁₀<br>(Cases)',
             tickvals=[2, 3, 4, 5, 6, 7, 8],
-            ticktext=['100', '1K', '10K', '100K', '1M', '10M', '100M']
+            ticktext=['100', '1K', '10K', '100K', '1M', '10M', '100M']  
         ),
         margin=dict(l=0, r=0, t=10, b=0),
         height=480,
@@ -343,7 +343,7 @@ def build_global_trend_chart(global_ts):
     fig.update_xaxes(gridcolor='#f0f0f0')
     return fig
 
-#this is used for building_top15_bar
+#this is used for building the top15_bar
 def build_top15_bar(long_df):
     """Horizontal bar chart — Top 15 countries by total cases."""
 
@@ -510,7 +510,7 @@ def build_global_forecast_chart(global_ts, global_forecast):
     )
     return fig
 
-
+# this function is used for building country forecast chart 
 def build_country_forecast_chart(country_forecasts_df, long_df, country):
     """Individual country Prophet forecast from pre-computed CSV."""
 
